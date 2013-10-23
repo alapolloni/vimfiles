@@ -1,0 +1,39 @@
+if has('gui_running')
+  set guifont=Consolas:h9:cANSI
+  "highlight the current line...great to see screenwraps
+  set cursorline
+  :hi Comment term=bold ctermfg=11 guifg=grey10
+  set co=200
+  set gfn=Consolas:h9:cANSI
+endif
+
+"colorscheme slate
+syntax enable
+set background=dark
+colorscheme solarized
+
+
+set ignorecase
+
+
+
+set printexpr=PrintFile(v:fname_in)
+function PrintFile(fname)
+  "call system("C:\Program Files (x86)\PrintFile\prfile32.exe " . a:fname)
+  call system("prfile32.exe " . a:fname)
+  call delete(a:fname)
+  return v:shell_error
+endfunc
+
+
+
+filetype indent on
+
+"This highlights the background in a subtle red for text that goes over the 80
+"column limit (subtle in GUI mode, anyway - in terminal mode it's less so).
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/ 
+
+
+set visualbell=on
+
